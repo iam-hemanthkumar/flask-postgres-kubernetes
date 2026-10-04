@@ -91,8 +91,6 @@ Before running the project, create your own:
 
 using the example files provided in the repository.
 
-Never commit real passwords or API keys to GitHub.
-
 ## What I Learned
 
 This project helped me understand how Docker and Kubernetes connect together in a real application setup, especially Services, Pods, Deployments, ConfigMaps, Secrets, and persistent storage.
