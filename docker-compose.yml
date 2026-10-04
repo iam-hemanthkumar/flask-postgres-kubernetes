@@ -1,0 +1,39 @@
+services:
+
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: mydb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  # Flask Application
+  web:
+    build: .
+    restart: always
+    ports:
+      - "8080:5000"
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: mydb
+      DB_USER: myuser
+      DB_PASSWORD: mysecretpassword
+      APP_SECRET_KEY: development-secret-key
+    depends_on:
+      - db
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
+
